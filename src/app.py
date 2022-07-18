@@ -2,12 +2,12 @@
 from flask import Flask, request, jsonify, make_response
 from telegramApi import TelegramApi
 import os, sys , re, json, time, requests
-
-import pyjokes
+#Hora
 from datetime import datetime
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
-
+#Bromas
+import pyjokes
 joke = pyjokes.get_joke(language='es', category='all')
 
 app = Flask(__name__)
@@ -31,16 +31,12 @@ def answer(word):
         market_cap = json_data["market_data"]["market_cap"]["eur"]
         links = json_data["links"]["homepage"][0]
         symbol= json_data["symbol"]
-        value=str(market_data)
-        value2=value.replace(',','.')
-        logger(value2)
-        #float(value2)
-        msg = f"Symbol: {symbol}\nPrecio actual: {float(value2)}€\nCapital de Mercado: {market_cap}€\nPagina oficial: {links}"
+        msg = f"Symbol: {symbol}\nPrecio actual: {market_data}€\nCapital de Mercado: {market_cap}€\nPagina oficial: {links}"
         return msg
 
 @app.route('/status', methods=['GET'])
 def get_status():
-    return 'Up and running', 201
+    return '[!] Esto esta encendido', 201
 
 
 @app.route('/webhook', methods=['GET', 'POST'])
@@ -72,7 +68,7 @@ def main():
             inline_keyboard = json.dumps({"inline_keyboard": [buttons]})
             telegramApi.send_message(chat_id, message, inline_keyboard)
         elif payload["message"]["text"] == "/hora":
-            message = current_time
+            message = "%s" % current_time
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/broma":
             message = joke
@@ -81,7 +77,7 @@ def main():
             message = "Arrancando maquinas...."
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/saludo":
-            message = "Hola que tal " + first_name
+            message = "Hola que tal %s " % first_name
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/ayuda":
             message = "busca en google"
@@ -89,7 +85,6 @@ def main():
     elif "channel_post" in payload:
         chat_id = payload["channel_post"]["chat"]["id"]
         msg = payload["channel_post"]["text"]
-        first_name = payload["channel_post"]["from"]["first_name"]
         message = answer(msg.lower())
         telegramApi.send_message(chat_id, message)
         if re.match(PATTERN, payload["channel_post"]["text"], re.IGNORECASE):
@@ -115,7 +110,7 @@ def main():
             message = "Arrancando maquinas...."
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/saludo":
-            message = "Hola que tal " + first_name
+            message = "Hola que tal "
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/ayuda":
             message = "busca en google"
