@@ -26,7 +26,10 @@ def answer(word):
         market_cap = json_data["market_data"]["market_cap"]["eur"]
         links = json_data["links"]["homepage"][0]
         symbol= json_data["symbol"]
-        msg = f"Symbol: {symbol}\nPrecio actual: {market_data}€\nCapital de Mercado: {market_cap}€\nPagina oficial: {links}"
+        value=str('market_data')
+        value2=value.replace(',','.')
+        #float(value2)
+        msg = f"Symbol: {symbol}\nPrecio actual: {float(value2)}€\nCapital de Mercado: {market_cap}€\nPagina oficial: {links}"
         return msg
 
 @app.route('/status', methods=['GET'])
