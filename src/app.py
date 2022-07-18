@@ -3,7 +3,12 @@ from flask import Flask, request, jsonify, make_response
 from telegramApi import TelegramApi
 import os, sys , re, json, time, requests
 
-#BOT_URL = f'https://api.telegram.org/bot{os.environ["{BOT_KEY}"]}/'  # <-- add your telegram token as environment variable
+import pyjokes
+from datetime import datetime
+now = datetime.now()
+current_time = now.strftime("%H:%M:%S")
+
+joke = pyjokes.getjoke(language='es', category='all')
 
 app = Flask(__name__)
 
@@ -65,6 +70,12 @@ def main():
                            "url": "https://google.es"})
             inline_keyboard = json.dumps({"inline_keyboard": [buttons]})
             telegramApi.send_message(chat_id, message, inline_keyboard)
+        elif payload["message"]["text"] == "/hora":
+            message = current_time
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/Broma":
+            message = joke
+            telegramApi.send_message(chat_id, message)
     elif "channel_post" in payload:
         chat_id = payload["channel_post"]["chat"]["id"]
         msg = payload["channel_post"]["text"]
@@ -83,6 +94,12 @@ def main():
                            "url": "https://google.es"})
             inline_keyboard = json.dumps({"inline_keyboard": [buttons]})
             telegramApi.send_message(chat_id, message, inline_keyboard)
+        elif payload["message"]["text"] == "/hora":
+            message = current_time
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/Broma":
+            message = joke
+            telegramApi.send_message(chat_id, message)
     return 'OK', 201
 
 
