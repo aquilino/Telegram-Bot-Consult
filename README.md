@@ -2,7 +2,7 @@ Installation
 ```
 git clone https://github.com/aquilino/Telegram-Bot-Consult.git
 cd Telegram-Bot-Consult
-edit bot.env ad to token tlegram
+edit bot.env add token telegram
 ```
 
 If you want to work with Traefik,
