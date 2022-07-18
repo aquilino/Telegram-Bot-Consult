@@ -8,7 +8,7 @@ from datetime import datetime
 now = datetime.now()
 current_time = now.strftime("%H:%M:%S")
 
-joke = pyjokes.getjoke(language='es', category='all')
+joke = pyjokes.get_joke(language='es', category='all')
 
 app = Flask(__name__)
 
@@ -54,6 +54,7 @@ def main():
     logger(json.dumps(payload, indent=4, sort_keys=True))
     if "message" in payload:
         chat_id = payload["message"]["chat"]["id"]
+        first_name = payload["message"]["chat"]["first_name"]
         msg = payload["message"]["text"]
         message = answer(msg.lower())
         telegramApi.send_message(chat_id, message)
@@ -73,12 +74,19 @@ def main():
         elif payload["message"]["text"] == "/hora":
             message = current_time
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/Broma":
+        elif payload["message"]["text"] == "/broma":
             message = joke
             telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/iniciar":
+            message = "Arrancando maquinas...." 
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/saludo":
+            message = "Hola que tal "
+            telegramApi.send_message(chat_id, message, first_name)
     elif "channel_post" in payload:
         chat_id = payload["channel_post"]["chat"]["id"]
         msg = payload["channel_post"]["text"]
+        first_name = payload["channel_post"]["chat"]["first_name"]
         message = answer(msg.lower())
         telegramApi.send_message(chat_id, message)
         if re.match(PATTERN, payload["channel_post"]["text"], re.IGNORECASE):
@@ -97,9 +105,15 @@ def main():
         elif payload["message"]["text"] == "/hora":
             message = current_time
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/Broma":
+        elif payload["message"]["text"] == "/broma":
             message = joke
             telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/iniciar":
+            message = "Arrancando maquinas...." 
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/saludo":
+            message = "Hola que tal "
+            telegramApi.send_message(chat_id, message, first_name)
     return 'OK', 201
 
 
