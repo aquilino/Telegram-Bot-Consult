@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx:
+    networks:
+      - proxy
+    labels:
+      - caddy="${HOSTNAME}"
+      - caddy.reverse_proxy="{{upstreams 5000}}"
+
+networks:
+  proxy:
+    external: true
