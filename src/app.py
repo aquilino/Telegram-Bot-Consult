@@ -26,7 +26,7 @@ def answer(word):
         market_cap = json_data["market_data"]["market_cap"]["eur"]
         links = json_data["links"]["homepage"][0]
         symbol= json_data["symbol"]
-        value=str('market_data')
+        value=str(market_data)
         value2=value.replace(',','.')
         logger(value2)
         #float(value2)
