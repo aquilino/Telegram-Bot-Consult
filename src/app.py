@@ -71,7 +71,7 @@ def main():
             message = "%s" % current_time
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/broma":
-            message = joke
+            message = "%s" % joke
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/iniciar":
             message = "Arrancando maquinas...."
@@ -101,10 +101,10 @@ def main():
             inline_keyboard = json.dumps({"inline_keyboard": [buttons]})
             telegramApi.send_message(chat_id, message, inline_keyboard)
         elif payload["message"]["text"] == "/hora":
-            message = current_time
+            message = "%s" % current_time
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/broma":
-            message = joke
+            message = "%s" % joke
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/iniciar":
             message = "Arrancando maquinas...."
