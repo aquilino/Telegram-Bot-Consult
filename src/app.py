@@ -28,6 +28,7 @@ def answer(word):
         symbol= json_data["symbol"]
         value=str('market_data')
         value2=value.replace(',','.')
+        logger(value2)
         #float(value2)
         msg = f"Symbol: {symbol}\nPrecio actual: {float(value2)}€\nCapital de Mercado: {market_cap}€\nPagina oficial: {links}"
         return msg
