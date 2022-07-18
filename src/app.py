@@ -54,7 +54,7 @@ def main():
     logger(json.dumps(payload, indent=4, sort_keys=True))
     if "message" in payload:
         chat_id = payload["message"]["chat"]["id"]
-        first_name = payload["message"]["chat"]["first_name"]
+        first_name = payload["message"]["from"]["first_name"]
         msg = payload["message"]["text"]
         message = answer(msg.lower())
         telegramApi.send_message(chat_id, message)
@@ -78,15 +78,18 @@ def main():
             message = joke
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/iniciar":
-            message = "Arrancando maquinas...." 
+            message = "Arrancando maquinas...."
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/saludo":
-            message = "Hola que tal "
-            telegramApi.send_message(chat_id, message, first_name)
+            message = "Hola que tal " + first_name
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/ayuda":
+            message = "busca en google"
+            telegramApi.send_message(chat_id, message)
     elif "channel_post" in payload:
         chat_id = payload["channel_post"]["chat"]["id"]
         msg = payload["channel_post"]["text"]
-        first_name = payload["channel_post"]["chat"]["first_name"]
+        first_name = payload["channel_post"]["from"]["first_name"]
         message = answer(msg.lower())
         telegramApi.send_message(chat_id, message)
         if re.match(PATTERN, payload["channel_post"]["text"], re.IGNORECASE):
@@ -109,11 +112,14 @@ def main():
             message = joke
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/iniciar":
-            message = "Arrancando maquinas...." 
+            message = "Arrancando maquinas...."
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/saludo":
-            message = "Hola que tal "
-            telegramApi.send_message(chat_id, message, first_name)
+            message = "Hola que tal " + first_name
+            telegramApi.send_message(chat_id, message)
+        elif payload["message"]["text"] == "/ayuda":
+            message = "busca en google"
+            telegramApi.send_message(chat_id, message)
     return 'OK', 201
 
 
