@@ -6,22 +6,5 @@ services:
     image: h1dr0/bot:amd64
     container_name: bot
     restart: unless-stopped
-    networks:
-      - proxy
     env_file:
       - bot.env
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.bot.loadbalancer.server.port=5000
-      - traefik.http.routers.bot.entrypoints=web
-      - traefik.http.routers.bot.rule=Host(`HOSTNAME`)
-      - traefik.http.middlewares.bot-https-redirect.redirectscheme.scheme=websecure
-      - traefik.http.routers.bot.middlewares=bot-https-redirect
-      - traefik.http.routers.bot-secure.entrypoints=websecure
-      - traefik.http.routers.bot-secure.rule=Host(`HOSTNAME`)
-      - traefik.http.routers.bot-secure.tls=true
-      - traefik.http.routers.bot-secure.tls.certresolver=letsencrypt
-
-networks:
-  proxy:
-    external: true
