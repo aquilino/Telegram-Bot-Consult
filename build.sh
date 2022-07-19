@@ -1,9 +1,8 @@
 #!/bin/bash
 
 echo -e "\t\n[*] ejemplo -> ./build.sh caddy "
-sleep(2);
 
-a = $1
+read a
 
 docker-compose down && \
 docker build -t h1dr0/bot:amd64 . && \
