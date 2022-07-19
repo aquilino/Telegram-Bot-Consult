@@ -1,8 +1,7 @@
 #!/bin/bash
 
-echo -e "\t\n[¡] Ejemplo -> caddy o traefik "
-
-read a
+echo -e "\t\n[¡] Seleccionar Proxy inverso -> caddy o traefik "
+echo -e "$> "; read a
 
 docker-compose down && \
 docker build -t h1dr0/bot:amd64 . && \
