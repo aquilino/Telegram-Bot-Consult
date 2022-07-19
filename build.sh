@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "\t\n[*] ejemplo -> ./build.sh caddy "
+echo -e "\t\n[¡] Ejemplo -> caddy o traefik "
 
 read a
 
