@@ -80,7 +80,14 @@ def main():
             message = "Hola que tal %s " % first_name
             telegramApi.send_message(chat_id, message)
         elif payload["message"]["text"] == "/ayuda":
-            message = "busca en google"
+            message = """
+Los comandos de memecoin_bot son:
+    <b>Ayuda</b> --> desplega este panel
+    <b>Hora</b> --> Nos dice la hora actual
+    <b>Iniciar</b> --> reinicia el bot
+    <b>Broma</b> --> Cuenta chistes random
+    <b>Enlaces</b> --> Muestra enlaces de interes
+    """
             telegramApi.send_message(chat_id, message)
     elif "channel_post" in payload:
         chat_id = payload["channel_post"]["chat"]["id"]
