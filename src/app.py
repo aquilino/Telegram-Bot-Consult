@@ -100,20 +100,27 @@ def main():
                            "url": "https://google.es"})
             inline_keyboard = json.dumps({"inline_keyboard": [buttons]})
             telegramApi.send_message(chat_id, message, inline_keyboard)
-        elif payload["message"]["text"] == "/hora":
+        elif payload["channel_post"]["text"] == "/hora":
             message = "%s" % current_time
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/broma":
+        elif payload["channel_post"]["text"] == "/broma":
             message = "%s" % joke
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/iniciar":
+        elif payload["channel_post"]["text"] == "/iniciar":
             message = "Arrancando maquinas...."
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/saludo":
+        elif payload["channel_post"]["text"] == "/saludo":
             message = "Hola que tal "
             telegramApi.send_message(chat_id, message)
-        elif payload["message"]["text"] == "/ayuda":
-            message = "busca en google"
+        elif payload["channel_post"]["text"] == "/ayuda":
+            message = """
+Los comandos de memecoin_bot son:
+    <b>Ayuda</b> --> desplega este panel
+    <b>Hora</b> --> Nos dice la hora actual
+    <b>Iniciar</b> --> reinicia el bot
+    <b>Broma</b> --> Cuenta chistes random
+    <b>Enlaces</b> --> Muestra enlaces de interes
+    """
             telegramApi.send_message(chat_id, message)
     return 'OK', 201
 
