@@ -48,6 +48,8 @@ def main():
         return 'OK', 200
     payload = request.json
     logger(json.dumps(payload, indent=4, sort_keys=True))
+    print(telegramApi.get_me())
+    print(telegramApi.get_updates())
     if "message" in payload:
         chat_id = payload["message"]["chat"]["id"]
         first_name = payload["message"]["from"]["first_name"]
