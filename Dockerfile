@@ -1,6 +1,6 @@
 FROM alpine:3.10
 
-MAINTAINER Aquilino Morcillo <a.k.a. h1dr0> "hidro23@gmail.com"
+MAINTAINER Aquilino Morcillo (h1dr0) "hidro23@gmail.com"
 
 ARG S6_OVERLAY_RELEASE=https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz
 
