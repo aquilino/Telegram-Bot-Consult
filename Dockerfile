@@ -28,7 +28,6 @@ RUN echo "**** install Python ****" && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi
 RUN pip3 install --no-cache-dir \
     flask \
-    datetime \
     pyjokes \
     itsdangerous \
     requests \
@@ -37,7 +36,7 @@ RUN pip3 install --no-cache-dir \
     rm -rf /var/lib/apt/lists/*
 RUN addgroup ebot && \
     adduser -h /app -G ebot -D ebot && \
-    chown -R ebot:ebot /app \
+    chown -R ebot:ebot /app && \
     ln -s /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
 WORKDIR /app
