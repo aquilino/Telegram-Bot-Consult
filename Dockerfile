@@ -18,6 +18,7 @@ RUN echo "**** install S6 ****" \
     && rm /tmp/s6overlay-amd64.tar.gz
 RUN echo "**** install Python ****" && \
     apk add --no-cache python3 && \
+    apk add --no-cache tzdata && \
     if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
     \
     echo "**** install pip ****" && \
@@ -36,7 +37,8 @@ RUN pip3 install --no-cache-dir \
     rm -rf /var/lib/apt/lists/*
 RUN addgroup ebot && \
     adduser -h /app -G ebot -D ebot && \
-    chown -R ebot:ebot /app
+    chown -R ebot:ebot /app \
+    ln -s /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 
 WORKDIR /app
 
